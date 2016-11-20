@@ -2,8 +2,8 @@
 
 ###### Resources
 * Visit http://pygame.org/docs/tut/newbieguide.html for a quick guide on pygames.
-* For the pygames documentation http://www.pygame.org/docs/ under refrences you can find the organized functions.
-* For a tutorial on make a game with pygames http://www.pygame.org/docs/tut/tom/MakeGames.html
+* For the pygames documentation http://www.pygame.org/docs/ under refrences you can find the api for pygames
+* For a tutorial on how to make a game with pygames http://www.pygame.org/docs/tut/tom/MakeGames.html
 * For moving images http://www.pygame.org/docs/tut/MoveIt.html
 * Example of "Dirty Rectangle Processing" discussed in the pygames guide http://archives.seul.org/pygame/users/Apr-2006/msg00216.html
 * For smooth gameplay http://gafferongames.com/game-physics/fix-your-timestep/
