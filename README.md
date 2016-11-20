@@ -6,7 +6,8 @@
 * For a tutorial on make a game with pygames http://www.pygame.org/docs/tut/tom/MakeGames.html
 * For moving images http://www.pygame.org/docs/tut/MoveIt.html
 * Example of "Dirty Rectangle Processing" discussed in the pygames guide http://archives.seul.org/pygame/users/Apr-2006/msg00216.html
-* For smooth gameplay gafferongames.com/game-physics/fix-your-timestep/
+* For smooth gameplay http://gafferongames.com/game-physics/fix-your-timestep/
+
 ###### Workflow
 1. Clone your fork to local computer:
 
