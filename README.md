@@ -65,7 +65,7 @@
 	```
 	git checkout master
 	git fetch upstream master
-	git mereg upstream/master
+	git merge upstream/master
 	```
 9. You can now delete your branch
 
