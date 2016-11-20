@@ -1,13 +1,32 @@
 #!/usr/bin/python
 
-import pygame
-
 from resolution_settings import *
+from menu import *
+
+FULL_SCREEN = 0
+SCREEN_X = 0
+SCREEN_Y = 1
+SCREEN_OPTION = 2
 
 
 def main():
+    # includes
+    pygame.init()
+    pygame.mixer.init()
+
+    # Resolution Menu
     resolution = SettingsMenu()
-    resolution.load_menu_objects()
+    settings = resolution.load_menu_objects()
+
+    # Get screen settings
+    if settings[SCREEN_OPTION] == FULL_SCREEN:
+        screen = pygame.display.set_mode((settings[SCREEN_X], settings[SCREEN_Y]), pygame.FULLSCREEN)
+    else:
+        screen = pygame.display.set_mode((settings[SCREEN_X], settings[SCREEN_Y]))
+
+    # Main Menu
+    game_selection = Menu(screen, settings)
+    game_selection.menu_loop()
 
 
 if __name__ == '__main__':
