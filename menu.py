@@ -11,6 +11,10 @@ FADE_OUT_EASING = lambda x: x
 BLACK = (0, 0, 0)
 WHITE = (250, 250, 250)
 
+QUIT = 0
+CUPS = 1
+
+
 class Menu:
     def __init__(self, screen, settings):
         self.__settings = settings
@@ -24,7 +28,7 @@ class Menu:
         self.__running = True
 
         # Fonts
-        self.__font = pygame.font.Font('resources/fonts/SkyrimFont.ttf', int(settings[0]/50))
+        self.__font = pygame.font.Font('resources/fonts/SkyrimFont.ttf', int(settings[0]/30))
 
         # Images
 
@@ -38,6 +42,12 @@ class Menu:
         self.__constructor()
 
     def __constructor(self):
+
+        # Loads the icon and surface name
+        icon = pygame.image.load('resources/images/game_icon.png').convert_alpha()
+        pygame.display.set_caption('16-Bit Hero Arcade')
+        pygame.display.set_icon(icon)
+
         if self.__settings[2] == 0:
             self.__fade_surface = pygame.surface.Surface((self.__settings[0], self.__settings[1]), pygame.FULLSCREEN)
         else:
@@ -59,6 +69,13 @@ class Menu:
         self.__f_game_quit_pos.centerx = self.__screen.get_rect().centerx
         self.__f_game_quit_pos.centery = self.__screen.get_rect().bottom - 100
         self.__l_blit_object.append(self.__f_game_quit_pos)
+        # Cups temp setup
+        self.__f_cups = self.__font.render("Cups", 1, WHITE)
+        self.__l_blit_object.append(self.__f_cups)
+        self.__f_cups_pos = self.__f_cups.get_rect()
+        self.__f_cups_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_cups_pos.centery = self.__screen.get_rect().centery - 200
+        self.__l_blit_object.append(self.__f_cups_pos)
         # Pacman Button
 
     def menu_loop(self):
@@ -70,14 +87,17 @@ class Menu:
             mouse_pos = pygame.mouse.get_pos()
             (on_click1, on_click2, on_click3) = pygame.mouse.get_pressed()
 
-            event = pygame.event.wait()
+            event = pygame.event.peek()
             if event.type == pygame.QUIT and game_start:
                 pygame.mixer.music.fadeout(3000)
                 self.__selection.play()
                 self.__running = False
                 return
 
-            if self.__f_game_quit_pos.collidepoint(mouse_pos) & on_click1 == 1 and game_start:
+            elif self.__f_cups_pos.collidepoint(mouse_pos) & on_click1 == 1:
+                return CUPS
+
+            elif self.__f_game_quit_pos.collidepoint(mouse_pos) & on_click1 == 1 and game_start:
                 pygame.mixer.music.fadeout(3000)
                 self.__selection.play()
                 game_start = False
@@ -96,7 +116,7 @@ class Menu:
                     self.__running = False
 
             # Blit
-            self.__screen.fill((0, 0, 0))
+            self.__screen.fill(BLACK)
             self.__fade_surface.fill(BLACK)
             for i in range(len(self.__l_blit_object)):
                 if i % 2 == 0:

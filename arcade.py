@@ -2,6 +2,7 @@
 
 from resolution_settings import *
 from menu import *
+from cups.Cups import Cups
 
 FULL_SCREEN = 0
 SCREEN_X = 0
@@ -26,8 +27,11 @@ def main():
 
     # Main Menu
     game_selection = Menu(screen, settings)
-    game_selection.menu_loop()
-
+    game = game_selection.menu_loop()
+    pygame.event.clear()
+    if game == 1:
+        game = Cups(screen)
+        game.game_loop()
 
 if __name__ == '__main__':
     main()
