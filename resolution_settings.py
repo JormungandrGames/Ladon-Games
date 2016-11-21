@@ -1,5 +1,7 @@
+from __future__ import division  # For Python 2.7
 import pygame
 from pygame.locals import *
+
 
 CHECK_BOX_OFFSET = 100
 CHECK_BOX_SIZE = 30
@@ -28,6 +30,7 @@ class SettingsMenu:
         # Variables
         b_options = []
         x_choice = None
+        screen_setting = 1
         res_text_list = []
         res_pos_list = []
         check_box_list = []
@@ -37,7 +40,9 @@ class SettingsMenu:
         click_window_option = False
         font = pygame.font.Font('resources/fonts/3Dventure.ttf', 30)
         font_accept = pygame.font.Font('resources/fonts/3Dventure.ttf', 80)
-        user_resolution = pygame.display.Info().current_w / pygame.display.Info().current_h;
+        user_resolution = pygame.display.Info().current_w / pygame.display.Info().current_h
+        screen_x = pygame.display.Info().current_w
+        screen_y = pygame.display.Info().current_h
 
         # Load background
         screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
@@ -47,27 +52,27 @@ class SettingsMenu:
         background = background.convert()
 
         # Images and fonts
-        icon = pygame.image.load('resources/images/game_icon.png')
-        check_box = pygame.image.load("resources/images/check_box.png")
+        icon = pygame.image.load('resources/images/game_icon.png').convert_alpha()
+        check_box = pygame.image.load("resources/images/check_box.png").convert_alpha()
         check_box = pygame.transform.scale(check_box, (CHECK_BOX_SIZE, CHECK_BOX_SIZE))
-        accept = pygame.image.load("resources/images/accept_button.png")
-        red_x = pygame.image.load("resources/images/red_x.png")
-        red_x_two = pygame.image.load("resources/images/red_x.png")
+        red_x = pygame.image.load("resources/images/red_x.png").convert_alpha()
+        red_x_two = pygame.image.load("resources/images/red_x.png").convert_alpha()
         full_text = font.render("Full Screen", 1, (20, 20, 20))
         window_text = font.render("Windowed", 1, (20, 20, 20))
         settings_font = font.render("Game Settings", 1, (10, 10, 10))
         accept_font = font_accept.render("Play", 1, (10, 10, 10))
 
         # Get resolution options
-        if user_resolution == 16 / 10:
+        if user_resolution == int(16 / 10):
             for i in range(len(self.__resolutions16_10)):
-                res_text = font.render(self.__resolutions16_9[i], 1, (20, 20, 20))
+                res_text = font.render(self.__resolutions16_10[i], 1, (20, 20, 20))
                 res_text_list.append(res_text)
                 res_pos = res_text.get_rect()
                 res_pos.centerx = background.get_rect().centerx
                 res_pos.centery += (80 + (i * 50))
                 res_pos_list.append(res_pos)
 
+                check_box_list.append(check_box)
                 b_accept_pos = check_box.get_rect()
                 b_accept_pos.centerx = res_pos.centerx - CHECK_BOX_OFFSET
                 b_accept_pos.centery = res_pos.centery
@@ -97,20 +102,22 @@ class SettingsMenu:
                 res_pos.centery += (80 + (i * 50))
                 res_pos_list.append(res_pos)
 
+                check_box_list.append(check_box)
                 b_accept_pos = check_box.get_rect()
                 b_accept_pos.centerx = res_pos.centerx - CHECK_BOX_OFFSET
                 b_accept_pos.centery = res_pos.centery
                 b_options.append(b_accept_pos)
 
         elif user_resolution == 3 / 2:
-            for i in range(len(self.__resolutions4_3)):
-                res_text = font.render(self.__resolutions4_3[i], 1, (20, 20, 20))
+            for i in range(len(self.__resolutions3_2)):
+                res_text = font.render(self.__resolutions3_2[i], 1, (20, 20, 20))
                 res_text_list.append(res_text)
                 res_pos = res_text.get_rect()
                 res_pos.centerx = background.get_rect().centerx
                 res_pos.centery += (80 + (i * 50))
                 res_pos_list.append(res_pos)
 
+                check_box_list.append(check_box)
                 b_accept_pos = check_box.get_rect()
                 b_accept_pos.centerx = res_pos.centerx - CHECK_BOX_OFFSET
                 b_accept_pos.centery = res_pos.centery
@@ -168,7 +175,6 @@ class SettingsMenu:
 
             for i in range(len(res_text_list)):
                 screen.blit(res_text_list[i], res_pos_list[i])
-                screen.blit(check_box_list[i], b_options[i])
 
             for i in range(len(check_box_list)):
                 screen.blit(check_box_list[i], b_options[i])
@@ -205,7 +211,7 @@ class SettingsMenu:
                             screen_y = int(self.__resolutions16_9[i][6:10])
                             x_choice = i
                         else:
-                            screen_x = int(self.__resolutions16_9[i][0:2])
+                            screen_x = int(self.__resolutions16_9[i][0:3])
                             screen_y = int(self.__resolutions16_9[i][4:7])
                             x_choice = i
 
@@ -262,6 +268,7 @@ class SettingsMenu:
 
             for event in pygame.event.get():
                 if event.type == QUIT:
+
                     running = False
 
             if b_accept_pos.collidepoint(mouse_pos) & on_click1 == 1:
