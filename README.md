@@ -74,3 +74,45 @@
 	git branch -d punetid_issue_#
 	```
 
+### Dependencies
+* Python2.7 Or newer
+* Pygames
+
+### Installing dependencies
+##### Arch Linux
+	```
+	pacman -S python # For the lastest version of python
+	pacman -S python2-pygame
+	'''
+##### Debian-Based Distros
+	```
+	# Comes with python 2.7, Upgrade with sudo apt-get install python3
+	sudo apt-get install python-pygame # or visit http://packages.qa.debian.org/p/pygame.html
+	```
+##### Fedora-based Distros and Others
+	```
+	# Comes with python 2.7
+	clone https://bitbucket.org/pygame/pygame
+	python3 config.py
+	python3 setup.py build
+	python3 setup.py install
+	```
+### Running 16-Bit-Hero-Arcade
+	```
+	git clone https://github.com/cs360f16/16-Bit-Hero-Arcade.git
+	cd 16-Bit-Hero-Arcade
+	chmod u+x arcade.py
+	./arcade.py
+	```
+### How to report Bugs or request Features
+* Reporting Bugs can be done through submitting an issue, clearly marked as a bug with a description of how to replicate it
+* Features may also be requested through submitting an issue, again, make sure it is marked as such
+
+### User conduct
+1. When submitting a pull request, another member shall merge it and fix any conflicts
+2. We are following the PEP 8 -- Style Guide for Python Code, tags for what the object you are blit'ing are appreciated Ex. f_name for fonts or i_name for images
+
+### License 
+* GPL license
+
+	
