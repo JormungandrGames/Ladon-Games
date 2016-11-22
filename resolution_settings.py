@@ -2,7 +2,6 @@ from __future__ import division  # For Python 2.7
 import pygame
 from pygame.locals import *
 
-
 CHECK_BOX_OFFSET = 100
 CHECK_BOX_SIZE = 30
 SCREEN_X = 500
@@ -30,7 +29,7 @@ class SettingsMenu:
         # Variables
         b_options = []
         x_choice = None
-        screen_setting = 1
+        screen_setting = 1 
         res_text_list = []
         res_pos_list = []
         check_box_list = []
@@ -168,20 +167,25 @@ class SettingsMenu:
         while running:
             screen.fill((100, 100, 100))
 
+            # Blits the fonts and window text
             screen.blit(settings_font, settings_font_pos)
             screen.blit(accept_font, b_accept_pos)
             screen.blit(full_text, full_text_pos)
             screen.blit(window_text, window_text_pos)
 
+            # BLits the resolution text
             for i in range(len(res_text_list)):
                 screen.blit(res_text_list[i], res_pos_list[i])
 
+            # Blits check boxs
             for i in range(len(check_box_list)):
                 screen.blit(check_box_list[i], b_options[i])
 
+            # Gets the mouse x and y
             mouse_pos = pygame.mouse.get_pos()
             (on_click1, on_click2, on_click3) = pygame.mouse.get_pressed()
 
+            # Get the users selection
             for i in range(len(b_options)):
                 if b_options[i].collidepoint(mouse_pos) & on_click1 == 1:
 
