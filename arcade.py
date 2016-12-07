@@ -3,6 +3,7 @@
 from resolution_settings import *
 from menu import *
 from cups.Cups import Cups
+from Snake.snake_game import Snake
 
 # SCREEN CONSTANTS
 SCREEN_OPTION = 2
@@ -12,6 +13,7 @@ SCREEN_Y = 1
 
 # GAME OPTIONS
 CUPS = 1
+SNAKE = 2
 
 
 def main():
@@ -42,6 +44,9 @@ def main():
 
         if game == CUPS:
             game = Cups(screen)
+            arcade_running = game.game_loop()
+        if game == SNAKE:
+            game = Snake(screen)
             arcade_running = game.game_loop()
 
 if __name__ == '__main__':

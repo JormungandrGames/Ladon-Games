@@ -26,9 +26,13 @@ BLACK = (0, 0, 0)
 FADE_BLIT = (0, 0)
 TITLE_Y = 100
 QUIT_Y = 100
+SNAKE_Y = 100
 CUP_Y = 200
 QUIT = 0
+
+# GAMES
 CUPS = 1
+SNAKE = 2
 
 # SCREEN CONSTANTS AND MUSIC
 MAX_SCREEN_SETTINGS = 2
@@ -106,6 +110,14 @@ class Menu:
         self.__f_cups_pos.centery = self.__screen.get_rect().centery - CUP_Y
         self.__l_blit_object.append(self.__f_cups_pos)
 
+        # snake temp setup
+        self.__f_snake = self.__font.render("snake", ANTI_ANILIASING, WHITE)
+        self.__l_blit_object.append(self.__f_snake)
+        self.__f_snake_pos = self.__f_snake.get_rect()
+        self.__f_snake_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_snake_pos.centery = self.__screen.get_rect().centery - SNAKE_Y
+        self.__l_blit_object.append(self.__f_snake_pos)
+
     def menu_loop(self):
         # Set up variables
         state_change = time.time()
@@ -130,6 +142,12 @@ class Menu:
                 self.__selection.play()
                 game_start = False
                 game_num = CUPS
+                # Returns the cups index number. ADD GAMES AFTER HERE AND CONSTANT AT TOP
+            elif self.__f_snake_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
+                pygame.mixer.music.fadeout(MUSIC_FADE)
+                self.__selection.play()
+                game_start = False
+                game_num = SNAKE
             # Quits the arcade
             elif self.__f_game_quit_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
                 return QUIT
