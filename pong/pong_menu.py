@@ -47,7 +47,7 @@ class PongMenu:
         self.__f_game_title_pos.centery = self.__screen.get_rect().top + 100
         self.__l_blit_object.append(self.__f_game_title_pos)
         # play button
-        self.__i_play_button = pygame.image.load("pong/resources/images/background.jpg").convert_alpha()
+        self.__i_play_button = pygame.image.load("pong/resources/images/background.png").convert_alpha()
         self.__i_play_button = pygame.transform.scale(self.__i_play_button, (200, 200))
         self.__l_blit_object.append(self.__i_play_button)
         self.__i_play_button_pos = self.__i_play_button.get_rect()
@@ -55,7 +55,7 @@ class PongMenu:
         self.__i_play_button_pos.centery = self.__screen.get_rect().top + 325
         self.__l_blit_object.append(self.__i_play_button_pos)
         # menu button
-        self.__i_menu_button = pygame.image.load("pong/resources/images/background.jpg").convert_alpha()
+        self.__i_menu_button = pygame.image.load("pong/resources/images/background.png").convert_alpha()
         self.__i_menu_button = pygame.transform.scale(self.__i_menu_button, (200, 200))
         self.__l_blit_object.append(self.__i_menu_button)
         self.__i_menu_button_pos = self.__i_menu_button.get_rect()
@@ -63,7 +63,7 @@ class PongMenu:
         self.__i_menu_button_pos.centery = self.__screen.get_rect().top + 500
         self.__l_blit_object.append(self.__i_menu_button_pos)
         # controls button
-        self.__i_help_button = pygame.image.load("pong/resources/images/background.jpg").convert_alpha()
+        self.__i_help_button = pygame.image.load("pong/resources/images/background.png").convert_alpha()
         self.__i_help_button = pygame.transform.scale(self.__i_help_button, (200, 200))
         self.__l_blit_object.append(self.__i_help_button)
         self.__i_help_button_pos = self.__i_help_button.get_rect()
@@ -71,7 +71,7 @@ class PongMenu:
         self.__i_help_button_pos.centery = self.__screen.get_rect().top + 550
         self.__l_blit_object.append(self.__i_help_button_pos)
         # exit button
-        self.__i_exit_button = pygame.image.load("pong/resources/images/background.jpg").convert_alpha()
+        self.__i_exit_button = pygame.image.load("pong/resources/images/background.png").convert_alpha()
         self.__i_exit_button = pygame.transform.scale(self.__i_exit_button, (200, 200))
         self.__l_blit_object.append(self.__i_exit_button)
         self.__i_exit_button_pos = self.__i_exit_button.get_rect()
