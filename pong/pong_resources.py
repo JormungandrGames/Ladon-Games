@@ -26,7 +26,7 @@ class PongBall:
         self.__y_position = 0
 
     def display_pong_ball(self):
-        pong_ball = pygame.draw.circle(self.__screen, BLACK, (self.__rect_x, self.__rect_y), self.__radius, FILL)
+        pong_ball = pygame.draw.circle(self.__screen, WHITE, (self.__rect_x, self.__rect_y), self.__radius, FILL)
         return pong_ball
 
     def update_pong_ball(self, paddle_one, paddle_two):

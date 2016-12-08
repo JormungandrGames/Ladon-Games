@@ -25,7 +25,7 @@ class Snake:
         self.__screen = screen
         self.__direction = NORTH
         self.__color = color
-        self.__Snake = [(screen.get_rect().centerx / SNAKE_SIZE, 50), (screen.get_rect().centerx / SNAKE_SIZE, 51), (screen.get_rect().centerx / SNAKE_SIZE, 52), (screen.get_rect().centerx / SNAKE_SIZE, 53), (screen.get_rect().centerx / SNAKE_SIZE, 54), (screen.get_rect().centerx / SNAKE_SIZE, 55), (screen.get_rect().centerx / SNAKE_SIZE, 56), (screen.get_rect().centerx / SNAKE_SIZE, 57)]
+        self.__Snake = [(screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE + 1), (screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE + 2), (screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE + 3), (screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE + 4), (screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE + 5), (screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE + 6)]
         self.__Apple = [screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE]
         self.__tail_size = 1
         self.__head_rect = pygame.Rect(SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE)
@@ -46,10 +46,10 @@ class Snake:
 
         if self.__head_rect.colliderect(apple_rect) == 1:
             wallsize = int(self.__screen.get_rect().height / 1.5)
-            large_x = (self.__screen.get_rect().centerx + (wallsize / 2) - 100) / SNAKE_SIZE
-            small_x = (self.__screen.get_rect().centerx - (wallsize / 2) + 100) / SNAKE_SIZE
-            large_y = (self.__screen.get_rect().centery + (wallsize / 2) - 100) / SNAKE_SIZE
-            small_y = (self.__screen.get_rect().centery - (wallsize / 2) + 100) / SNAKE_SIZE
+            large_x = int((self.__screen.get_rect().centerx + (wallsize / 2) - 100) / SNAKE_SIZE)
+            small_x = int((self.__screen.get_rect().centerx - (wallsize / 2) + 100) / SNAKE_SIZE)
+            large_y = int((self.__screen.get_rect().centery + (wallsize / 2) - 100) / SNAKE_SIZE)
+            small_y = int((self.__screen.get_rect().centery - (wallsize / 2) + 100) / SNAKE_SIZE)
             self.__Apple = [randint(small_x, large_x), randint(small_y, large_y)]
             head = self.__Snake[0]
             head = (head[HEAD] + self.__x_pos, head[1] + self.__y_pos)
