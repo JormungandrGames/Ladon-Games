@@ -26,10 +26,15 @@ BLACK = (0, 0, 0)
 FADE_BLIT = (0, 0)
 TITLE_Y = 100
 QUIT_Y = 100
-CUP_Y = 200
+ROW_ONE = 200
+ROW_TWO = 300
+CUPS_Y = 100
+PONG_Y = 200
+SNAKE_Y = 300
 QUIT = 0
 CUPS = 1
 PONG = 2
+SNAKE = 3
 
 # SCREEN CONSTANTS AND MUSIC
 MAX_SCREEN_SETTINGS = 2
@@ -103,17 +108,25 @@ class Menu:
         self.__f_cups = self.__font.render("Cups", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_cups)
         self.__f_cups_pos = self.__f_cups.get_rect()
-        self.__f_cups_pos.centerx = self.__screen.get_rect().centerx + 100
-        self.__f_cups_pos.centery = self.__screen.get_rect().centery - CUP_Y
+        self.__f_cups_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_cups_pos.centery = self.__screen.get_rect().centery - CUPS_Y
         self.__l_blit_object.append(self.__f_cups_pos)
 
         # Pong temp setup
         self.__f_pong = self.__font.render("Pong", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_pong)
         self.__f_pong_pos = self.__f_pong.get_rect()
-        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx - 100
-        self.__f_pong_pos.centery = self.__screen.get_rect().centery - CUP_Y
+        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_pong_pos.centery = self.__screen.get_rect().centery - PONG_Y
         self.__l_blit_object.append(self.__f_pong_pos)
+
+        # Snake temp setup
+        self.__f_Snake = self.__font.render("Snake", ANTI_ANILIASING, WHITE)
+        self.__l_blit_object.append(self.__f_Snake)
+        self.__f_Snake_pos = self.__f_Snake.get_rect()
+        self.__f_Snake_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_Snake_pos.centery = self.__screen.get_rect().centery - SNAKE_Y
+        self.__l_blit_object.append(self.__f_Snake_pos)
 
     def menu_loop(self):
         # Set up variables
@@ -145,6 +158,11 @@ class Menu:
                 self.__selection.play()
                 game_start = False
                 game_num = PONG
+            elif self.__f_Snake_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
+                pygame.mixer.music.fadeout(MUSIC_FADE)
+                self.__selection.play()
+                game_start = False
+                game_num = SNAKE
             # Quits the arcade
             elif self.__f_game_quit_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
                 return QUIT
