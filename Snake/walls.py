@@ -34,3 +34,4 @@ class BuildWalls:
         self.__walls.append(west_rect)
 
         return self.__walls
+

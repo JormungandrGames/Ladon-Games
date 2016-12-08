@@ -31,6 +31,7 @@ class Snake:
         self.__head_rect = pygame.Rect(SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE)
         self.__score = 0
 
+
     def blit(self):
         count = 0
         for i in self.__Snake:

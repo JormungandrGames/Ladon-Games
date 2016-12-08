@@ -6,6 +6,7 @@ from cups import Cups
 from pong import pong_menu
 from Snake import snake_game
 
+
 # SCREEN CONSTANTS
 SCREEN_OPTION = 2
 FULL_SCREEN = 0
@@ -54,6 +55,9 @@ def main():
 
         if game == SNAKE:
             game = snake_game.Snake(screen)
+            arcade_running = game.game_loop()
+        if game == SNAKE:
+            game = Snake(screen)
             arcade_running = game.game_loop()
 
 if __name__ == '__main__':

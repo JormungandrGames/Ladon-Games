@@ -28,13 +28,16 @@ TITLE_Y = 100
 QUIT_Y = 100
 ROW_ONE = 200
 ROW_TWO = 300
-CUPS_Y = 100
-PONG_Y = 200
-SNAKE_Y = 300
+CUPS_Y = 200
+PONG_Y = 300
+SNAKE_Y = 400
 QUIT = 0
+
+# GAMES
 CUPS = 1
 PONG = 2
 SNAKE = 3
+
 
 # SCREEN CONSTANTS AND MUSIC
 MAX_SCREEN_SETTINGS = 2
@@ -109,7 +112,7 @@ class Menu:
         self.__l_blit_object.append(self.__f_cups)
         self.__f_cups_pos = self.__f_cups.get_rect()
         self.__f_cups_pos.centerx = self.__screen.get_rect().centerx
-        self.__f_cups_pos.centery = self.__screen.get_rect().centery - CUPS_Y
+        self.__f_cups_pos.centery = self.__screen.get_rect().top + CUPS_Y
         self.__l_blit_object.append(self.__f_cups_pos)
 
         # Pong temp setup
@@ -117,7 +120,7 @@ class Menu:
         self.__l_blit_object.append(self.__f_pong)
         self.__f_pong_pos = self.__f_pong.get_rect()
         self.__f_pong_pos.centerx = self.__screen.get_rect().centerx
-        self.__f_pong_pos.centery = self.__screen.get_rect().centery - PONG_Y
+        self.__f_pong_pos.centery = self.__screen.get_rect().top + PONG_Y
         self.__l_blit_object.append(self.__f_pong_pos)
 
         # Snake temp setup
@@ -125,7 +128,7 @@ class Menu:
         self.__l_blit_object.append(self.__f_Snake)
         self.__f_Snake_pos = self.__f_Snake.get_rect()
         self.__f_Snake_pos.centerx = self.__screen.get_rect().centerx
-        self.__f_Snake_pos.centery = self.__screen.get_rect().centery - SNAKE_Y
+        self.__f_Snake_pos.centery = self.__screen.get_rect().top + SNAKE_Y
         self.__l_blit_object.append(self.__f_Snake_pos)
 
     def menu_loop(self):
@@ -152,12 +155,15 @@ class Menu:
                 self.__selection.play()
                 game_start = False
                 game_num = CUPS
+
             # Returns the pong index number
             elif self.__f_pong_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
                 pygame.mixer.music.fadeout(MUSIC_FADE)
                 self.__selection.play()
                 game_start = False
                 game_num = PONG
+
+            # Returns the snake index number
             elif self.__f_Snake_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
                 pygame.mixer.music.fadeout(MUSIC_FADE)
                 self.__selection.play()

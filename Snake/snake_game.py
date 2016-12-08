@@ -12,7 +12,6 @@ SNAKE_COLOR_H = (255, 0, 0)
 # SCREEN, FONT AND MUSIC CONSTANTS
 ANTI_ANILIASING = 1
 LOOP_MUSIC = -1
-
 SPEED = 10
 
 
@@ -26,10 +25,10 @@ class Snake:
         # Sounds
         self.__music = pygame.mixer.music.load('Snake/resources/music/BushesLove.ogg')
 
-    def game_loop(self):
         # Loads the music, -1 means loop it forever
         pygame.mixer.music.play(LOOP_MUSIC)
 
+    def game_loop(self):
         # Call pause
         pause = Pause(self.__screen)
         pause_options = None
@@ -46,6 +45,12 @@ class Snake:
         while self.__running:
             # Clears the screen and fills it with color (black)
             self.__screen.fill(BLACK)
+            score = snake.score()
+
+            if score == -1:
+                # Snake Objects
+                self.__running = False
+                Snake.game_loop(self)
 
             # Blit the Snake and walls
             head_rect = snake.blit()
@@ -62,14 +67,7 @@ class Snake:
             for i in walls_rect:
                 if i.colliderect(head_rect):
                     snake.kill_snake()
-
-            score = snake.score()
-
-            if score == -1:
-                # Snake Objects
-                snake_head = player.Snake(self.__screen, self.__screen.get_rect().centerx,
-                                          self.__screen.get_rect().centery, SNAKE_COLOR_H)
-                game_walls = walls.BuildWalls(self.__screen)
+                    score = -1
 
             # Get mouse clicks
             mouse_pos = pygame.mouse.get_pos()
