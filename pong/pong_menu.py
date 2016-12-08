@@ -1,8 +1,9 @@
 from __future__ import division
 import pygame
-from pong_game import *
 from pause_menu import *
-from controls import *
+from pong import controls
+from pong import pong_resources
+from pong import pong_game
 
 
 # Pong game!
@@ -11,6 +12,7 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 MAIN_MENU = 1
 EXIT = 2
+MENU = 0
 
 
 class PongMenu:
@@ -26,11 +28,7 @@ class PongMenu:
         self.__running = True
 
         # Init Music
-        self.__music = pygame.mixer.music.load('pong/resources/music/YodaSong.mp3')
-
-        # Red exit button
-        self.__exit = pygame.image.load('pong/resources/images/exit.png').convert_alpha()
-        self.__exit = pygame.transform.scale(self.__exit, (40, 40))
+        self.__music = pygame.mixer.music.load('pong/resources/music/NotTheFuture.ogg')
 
         # Load Font
         self.__font = pygame.font.Font('pong/resources/fonts/NIAGENG.TTF', 100)
@@ -40,7 +38,7 @@ class PongMenu:
 
     def __constructor(self):
         # Loads the music, -1 means loop it forever
-        pygame.mixer.music.play(-1)
+        # pygame.mixer.music.play(-1)
 
         # Load Buttons and title
         # title
@@ -120,7 +118,7 @@ class PongMenu:
 
         # Call pause
         pause = Pause(self.__screen)
-        controls = Controls(self.__screen)
+        c_controls = controls.Controls(self.__screen)
         pause_options = None
         self.__running = True
 
@@ -136,8 +134,8 @@ class PongMenu:
 
                 elif self.__i_play_button_pos.collidepoint(mouse_pos) & on_click1 == 1 and game_start:
                     self.__running = False
-                    pong_game = PongGame(self.__screen)
-                    arcade_running = pong_game.game_loop()
+                    ponggame = pong_game.PongGame(self.__screen)
+                    arcade_running = ponggame.game_loop()
                     if arcade_running != MENU:
                         return arcade_running
                     if arcade_running == MENU:
@@ -148,7 +146,7 @@ class PongMenu:
                     return True
 
                 elif self.__i_help_button_pos.collidepoint(mouse_pos) & on_click1 == 1 and game_start:
-                    control_screen = controls.control_loop()
+                    control_screen = c_controls.control_loop()
                     if control_screen == EXIT:
                         self.__running = False
                         return

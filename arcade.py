@@ -2,8 +2,10 @@
 
 from resolution_settings import *
 from menu import *
-from Cups import *
-from pong_menu import *
+from cups import Cups
+from pong import pong_menu
+from Snake import snake_game
+
 
 # SCREEN CONSTANTS
 SCREEN_OPTION = 2
@@ -14,6 +16,7 @@ SCREEN_Y = 1
 # GAME OPTIONS
 CUPS = 1
 PONG = 2
+SNAKE = 3
 
 
 def main():
@@ -43,11 +46,18 @@ def main():
             arcade_running = False
 
         if game == CUPS:
-            game = Cups(screen)
+            game = Cups.Cups(screen)
             arcade_running = game.game_loop()
 
         if game == PONG:
-            game = PongMenu(screen)
+            game = pong_menu.PongMenu(screen)
+            arcade_running = game.game_loop()
+
+        if game == SNAKE:
+            game = snake_game.Snake(screen)
+            arcade_running = game.game_loop()
+        if game == SNAKE:
+            game = Snake(screen)
             arcade_running = game.game_loop()
 
 if __name__ == '__main__':

@@ -1,8 +1,10 @@
 from __future__ import division
 import pygame
-from pong_resources import *
 from pause_menu import *
-from winner_display import *
+from pong import controls
+from pong import pong_resources
+from pong import pong_game
+from pong import winner_display
 
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -15,6 +17,7 @@ FILL = 0
 SCREEN_BUFFER = 75
 PLAYER_ONE = 0
 PLAYER_TWO = 1
+MENU = 0
 
 
 class PongGame:
@@ -32,7 +35,7 @@ class PongGame:
         self.__running = True
 
         # Init Music
-        self.__music = pygame.mixer.music.load('pong/resources/music/YodaSong.mp3')
+        self.__music = pygame.mixer.music.load('pong/resources/music/NotTheFuture.ogg')
 
         # Load Font
         self.__font = pygame.font.Font('pong/resources/fonts/NIAGENG.TTF', 100)
@@ -131,15 +134,15 @@ class PongGame:
 
         player_one = self.__screen.get_rect().left + (SCREEN_BUFFER + PADDLE_SHORT)
         player_two = self.__screen.get_rect().right - SCREEN_BUFFER
-        pong_ball = PongBall(self.__screen)
-        paddle_one = Paddle(self.__screen, RED, player_one)
-        paddle_two = Paddle(self.__screen, BLUE, player_two)
+        pong_ball = pong_resources.PongBall(self.__screen)
+        paddle_one = pong_resources.Paddle(self.__screen, RED, player_one)
+        paddle_two = pong_resources.Paddle(self.__screen, BLUE, player_two)
         k = 0
         j = 0
 
         # Call pause
         pause = Pause(self.__screen)
-        winnner_display = WinnerDisplay(self.__screen)
+        winnner_display = winner_display.WinnerDisplay(self.__screen)
 
         while self.__running:
 

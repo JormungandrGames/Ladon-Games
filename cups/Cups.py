@@ -21,8 +21,11 @@ RAND_RANGE_TWO = 3
 FONT_MODIFIER = 15
 CLICKED = 1
 
+# GREG
+GREG_SIZE_X = 200
+GREG_SIZE_Y = 150
+
 # POSITION CONSTANTS
-EXIT_SIZE = (40, 40)
 CUP_ONE_X = 100
 CUP_TWO_X = 400
 CUP_THREE_X = 200
@@ -33,6 +36,7 @@ CUP_SIZE_Y = 300
 RECT_WIDTH = 1
 TEXT_Y = 300
 TEXT_SIZE = 50
+SCORE_X = 280
 
 
 class Cups:
@@ -44,13 +48,20 @@ class Cups:
         self.__running = True
 
         # Init Music
-        self.__music = pygame.mixer.music.load('cups/resources/music/YodaSong.mp3')
+        self.__music = pygame.mixer.music.load('cups/resources/music/YodaSong.ogg')
 
         # Load Font
         self.__font = pygame.font.Font('cups/resources/fonts/NIAGENG.TTF',
                                        int(self.__screen.get_rect().height/FONT_MODIFIER))
 
+        self.__score = 0
+
     def game_loop(self):
+        # Greg
+        greg = pygame.image.load('cups/resources/images/greg.png').convert_alpha()
+        greg = pygame.transform.scale(greg, (GREG_SIZE_X, GREG_SIZE_Y))
+        greg_pos = greg.get_rect()
+
         # Loads the music, -1 means loop it forever
         pygame.mixer.music.play(LOOP_MUSIC)
 
@@ -62,7 +73,7 @@ class Cups:
         pause = Pause(self.__screen)
         pause_options = None
         self.__running = True
-
+        count = 0
         # Game Loop
         while self.__running:
             # Clears the screen and fills it with color (black)
@@ -83,7 +94,7 @@ class Cups:
             # Get mouse clicks
             mouse_pos = pygame.mouse.get_pos()
             (on_click1, on_click2, on_click3) = pygame.mouse.get_pressed()
-
+            cup_num = 0
             # On mouse and keyboard events
             for event in pygame.event.get():
                 # Hit quit
@@ -93,18 +104,22 @@ class Cups:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     restart = False
                     rand = None
+                    count = 0
                 # Check for cup one click
                 elif cup_one.collidepoint(mouse_pos) & on_click1 == CLICKED and restart is False:
                     rand = randint(RAND_RANGE_ONE, RAND_RANGE_TWO)
                     restart = True
+                    cup_num = 1
                 # Check for cup two click
                 elif cup_two.collidepoint(mouse_pos) & on_click1 == CLICKED and restart is False:
                     rand = randint(RAND_RANGE_ONE, RAND_RANGE_TWO)
                     restart = True
+                    cup_num = 2
                 # Check for cup three click
                 elif cup_three.collidepoint(mouse_pos) & on_click1 == CLICKED and restart is False:
                     rand = randint(RAND_RANGE_ONE, RAND_RANGE_TWO)
                     restart = True
+                    cup_num = 3
 
                 # Get escape key press for menu; COPY THIS BLOCK FOR PAUSE MENU
                 elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
@@ -115,10 +130,23 @@ class Cups:
                     elif pause_options == 1:
                         self.__running = False
 
-                if rand == 1:
-                    win = self.__font.render("You Win!", ANTI_ANILIASING, BLUE)
+                if rand == 1 and count == 0:
+                    count = 1
+                    self.__score += 1
+                    win = self.__font.render("You Win! Score: ", ANTI_ANILIASING, BLUE)
+                    score = self.__font.render(str(self.__score), ANTI_ANILIASING, BLUE)
                     self.__screen.blit(win, (cup_one.centerx, cup_one.centery - TEXT_Y, TEXT_SIZE, TEXT_SIZE))
-                elif rand is not None:
+                    self.__screen.blit(score, (cup_one.centerx + SCORE_X, cup_one.centery - TEXT_Y, TEXT_SIZE, TEXT_SIZE))
+                    if cup_num == 1:
+                        greg_pos = (cup_two.centerx - CUP_TWO_X, self.__screen.get_rect().centery - OUTER_CUPS_Y)
+                    if cup_num == 2:
+                        greg_pos = (self.__screen.get_rect().centerx - CUP_ONE_X,
+                                    self.__screen.get_rect().centery - INNER_CUP_Y)
+                    if cup_num == 3:
+                        greg_pos = (cup_two.centerx + CUP_THREE_X, self.__screen.get_rect().centery - OUTER_CUPS_Y)
+                    self.__screen.blit(greg, greg_pos)
+                elif rand is not None and count == 0:
+                    count = 1
                     lose = self.__font.render("You Lose :(", ANTI_ANILIASING, BLUE)
                     self.__screen.blit(lose, (cup_one.centerx, cup_one.centery - TEXT_Y, TEXT_SIZE, TEXT_SIZE))
 
