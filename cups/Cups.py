@@ -3,6 +3,7 @@ from random import randint
 from pause_menu import *
 from menu import *
 
+
 #
 # SKIP TO LINE 107 FOR PAUSE MENU
 #
@@ -104,6 +105,7 @@ class Cups:
                 elif cup_three.collidepoint(mouse_pos) & on_click1 == CLICKED and restart is False:
                     rand = randint(RAND_RANGE_ONE, RAND_RANGE_TWO)
                     restart = True
+
                 # Get escape key press for menu; COPY THIS BLOCK FOR PAUSE MENU
                 elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
                     pause_options = pause.pause_loop()

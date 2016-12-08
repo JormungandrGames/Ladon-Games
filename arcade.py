@@ -2,7 +2,8 @@
 
 from resolution_settings import *
 from menu import *
-from cups.Cups import Cups
+from Cups import *
+from pong_menu import *
 
 # SCREEN CONSTANTS
 SCREEN_OPTION = 2
@@ -12,6 +13,7 @@ SCREEN_Y = 1
 
 # GAME OPTIONS
 CUPS = 1
+PONG = 2
 
 
 def main():
@@ -42,6 +44,10 @@ def main():
 
         if game == CUPS:
             game = Cups(screen)
+            arcade_running = game.game_loop()
+
+        if game == PONG:
+            game = PongMenu(screen)
             arcade_running = game.game_loop()
 
 if __name__ == '__main__':
