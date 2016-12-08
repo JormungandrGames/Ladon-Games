@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 
 # SNAKE HEAD VARIABLES
 NORTH = 0
@@ -25,16 +26,29 @@ class Snake:
         self.__direction = NORTH
         self.__color = color
         self.__Snake = [(screen.get_rect().centerx / SNAKE_SIZE, 50), (screen.get_rect().centerx / SNAKE_SIZE, 51), (screen.get_rect().centerx / SNAKE_SIZE, 52), (screen.get_rect().centerx / SNAKE_SIZE, 53), (screen.get_rect().centerx / SNAKE_SIZE, 54), (screen.get_rect().centerx / SNAKE_SIZE, 55), (screen.get_rect().centerx / SNAKE_SIZE, 56), (screen.get_rect().centerx / SNAKE_SIZE, 57)]
-        
+        self.__Apple = [screen.get_rect().centerx / SNAKE_SIZE, screen.get_rect().centery / SNAKE_SIZE]
         self.__tail_size = 1
+        self.__head_rect = pygame.Rect(SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE)
 
     def blit(self):
+        count = 0
         for i in self.__Snake:
-            rect = (i[0] * SNAKE_SIZE, i[1] * SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE)
+            rect = pygame.Rect(i[0] * SNAKE_SIZE, i[1] * SNAKE_SIZE, SNAKE_SIZE, SNAKE_SIZE)
             pygame.draw.rect(self.__screen, self.__color, rect)
+            if count == 0:
+                self.__head_rect = rect
+                count = 1
+
+        apple_rect = pygame.Rect(self.__Apple[0] * SNAKE_SIZE, self.__Apple[1] * SNAKE_SIZE, SNAKE_SIZE - 1, SNAKE_SIZE - 1)
+        pygame.draw.rect(self.__screen, (0, 255, 0), apple_rect)
+
+        if self.__head_rect.colliderect(apple_rect) == 1:
+            head = self.__Snake[0]
+            head = (head[HEAD] + self.__x_pos, head[1] + self.__y_pos)
+            self.__Snake.insert(HEAD, head)
+            self.__Apple = [0, 0]
 
     def move(self):
-        head = self.__Snake[0]
         if self.__direction == NORTH:
             self.__x_pos = 0
             self.__y_pos = -self.__speed
@@ -48,9 +62,9 @@ class Snake:
             self.__x_pos = -self.__speed
             self.__y_pos = 0
 
-        t = self.__Snake[HEAD]
-        t = (t[HEAD] + self.__x_pos, t[1] + self.__y_pos)
-        self.__Snake.insert(HEAD, t)
+        head = self.__Snake[0]
+        head = (head[HEAD] + self.__x_pos, head[1] + self.__y_pos)
+        self.__Snake.insert(HEAD, head)
         del self.__Snake[-1]
         if self.__Snake[HEAD] in self.__Snake[1:]:
             del self.__Snake[2:]
@@ -66,7 +80,5 @@ class Snake:
         elif key_pressed[pygame.K_LEFT] and self.__direction != EAST:
             self.__direction = WEST
 
-    def generateApple(self):
-        for i in self.__Snake:
-            i = self.__Apple.index(Snake[HEAD])
+
 

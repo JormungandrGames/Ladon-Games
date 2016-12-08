@@ -78,4 +78,4 @@ class Snake:
                         self.__running = False
 
             # Updates the screen
-            pygame.display.flip()
+            pygame.display.update()
