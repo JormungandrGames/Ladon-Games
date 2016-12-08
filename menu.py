@@ -29,6 +29,7 @@ QUIT_Y = 100
 CUP_Y = 200
 QUIT = 0
 CUPS = 1
+PONG = 2
 
 # SCREEN CONSTANTS AND MUSIC
 MAX_SCREEN_SETTINGS = 2
@@ -102,9 +103,17 @@ class Menu:
         self.__f_cups = self.__font.render("Cups", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_cups)
         self.__f_cups_pos = self.__f_cups.get_rect()
-        self.__f_cups_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_cups_pos.centerx = self.__screen.get_rect().centerx + 100
         self.__f_cups_pos.centery = self.__screen.get_rect().centery - CUP_Y
         self.__l_blit_object.append(self.__f_cups_pos)
+
+        # Pong temp setup
+        self.__f_pong = self.__font.render("Pong", ANTI_ANILIASING, WHITE)
+        self.__l_blit_object.append(self.__f_pong)
+        self.__f_pong_pos = self.__f_pong.get_rect()
+        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx - 100
+        self.__f_pong_pos.centery = self.__screen.get_rect().centery - CUP_Y
+        self.__l_blit_object.append(self.__f_pong_pos)
 
     def menu_loop(self):
         # Set up variables
@@ -130,6 +139,12 @@ class Menu:
                 self.__selection.play()
                 game_start = False
                 game_num = CUPS
+            # Returns the pong index number
+            elif self.__f_pong_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
+                pygame.mixer.music.fadeout(MUSIC_FADE)
+                self.__selection.play()
+                game_start = False
+                game_num = PONG
             # Quits the arcade
             elif self.__f_game_quit_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
                 return QUIT
