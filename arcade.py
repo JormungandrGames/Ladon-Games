@@ -5,6 +5,7 @@ from menu import *
 from cups import Cups
 from pong import pong_menu
 from Snake import snake_game
+from gs_demo import gs_demo
 
 
 # SCREEN CONSTANTS
@@ -17,11 +18,13 @@ SCREEN_Y = 1
 CUPS = 1
 PONG = 2
 SNAKE = 3
+TTT = 4
 
 
 def main():
     arcade_running = True
     game = None
+    game_call = None
 
     # includes
     pygame.init()
@@ -46,19 +49,20 @@ def main():
             arcade_running = False
 
         if game == CUPS:
-            game = Cups.Cups(screen)
-            arcade_running = game.game_loop()
+            game_call = Cups.Cups(screen)
+            arcade_running = game_call.game_loop()
 
         if game == PONG:
-            game = pong_menu.PongMenu(screen)
-            arcade_running = game.game_loop()
+            game_call = pong_menu.PongMenu(screen)
+            arcade_running = game_call.game_loop()
 
         if game == SNAKE:
-            game = snake_game.Snake(screen)
-            arcade_running = game.game_loop()
-        if game == SNAKE:
-            game = Snake(screen)
-            arcade_running = game.game_loop()
+            game_call = snake_game.Snake(screen)
+            arcade_running = game_call.game_loop()
+
+        if game == TTT:
+            game_call = gs_demo.GameSkeletonDemo(screen)
+            arcade_running = game_call.game_loop()
 
 if __name__ == '__main__':
     main()

@@ -7,7 +7,7 @@ FONT_MODIFIER = 30
 # Volume is incremented or decremented by 10%
 VOLUME_CHANGE = 0.1
 FONT_H_ADJ = 4
-GAME_BAR_COLOR = (50, 50, 50)
+GAME_BAR_COLOR = (70, 70, 70)
 GAME_BAR_FONT_COLOR = (0, 0, 0)
 START_X = 0
 START_Y = 0
