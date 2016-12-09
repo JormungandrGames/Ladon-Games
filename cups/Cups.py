@@ -1,5 +1,4 @@
 from random import randint
-
 from game_skeleton import game_skeleton
 from menu import *
 
