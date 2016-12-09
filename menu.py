@@ -28,9 +28,11 @@ TITLE_Y = 100
 QUIT_Y = 100
 ROW_ONE = 200
 ROW_TWO = 300
-CUPS_Y = 200
+CUPS_Y = 450
 PONG_Y = 300
-SNAKE_Y = 400
+SNAKE_Y = 300
+PONG_X = 100
+SNAKE_X = 100
 QUIT = 0
 
 # GAMES
@@ -99,6 +101,33 @@ class Menu:
         self.__f_game_title_pos.centery = self.__screen.get_rect().top + TITLE_Y
         self.__l_blit_object.append(self.__f_game_title_pos)
 
+        # Image cups set up
+        self.__i_cups_button = pygame.image.load("cups/resources/images/cups_menu.png").convert_alpha()
+        self.__i_cups_button = pygame.transform.scale(self.__i_cups_button, (150, 150))
+        self.__l_blit_object.append(self.__i_cups_button)
+        self.__i_cups_button_pos = self.__i_cups_button.get_rect()
+        self.__i_cups_button_pos.centerx = self.__screen.get_rect().centerx
+        self.__i_cups_button_pos.centery = self.__screen.get_rect().top + CUPS_Y
+        self.__l_blit_object.append(self.__i_cups_button_pos)
+
+        # Image pong set up
+        self.__i_pong_button = pygame.image.load("pong/resources/images/pong_menu.png").convert_alpha()
+        self.__i_pong_button = pygame.transform.scale(self.__i_pong_button, (200, 225))
+        self.__l_blit_object.append(self.__i_pong_button)
+        self.__i_pong_button_pos = self.__i_pong_button.get_rect()
+        self.__i_pong_button_pos.centerx = self.__screen.get_rect().centerx + PONG_X
+        self.__i_pong_button_pos.centery = self.__screen.get_rect().top + PONG_Y
+        self.__l_blit_object.append(self.__i_pong_button_pos)
+
+        # Image snake set up
+        self.__i_snake_button = pygame.image.load("Snake/resources/images/snake_menu.png").convert_alpha()
+        self.__i_snake_button = pygame.transform.scale(self.__i_snake_button, (225, 225))
+        self.__l_blit_object.append(self.__i_snake_button)
+        self.__i_snake_button_pos = self.__i_snake_button.get_rect()
+        self.__i_snake_button_pos.centerx = self.__screen.get_rect().centerx - SNAKE_X
+        self.__i_snake_button_pos.centery = self.__screen.get_rect().top + SNAKE_Y
+        self.__l_blit_object.append(self.__i_snake_button_pos)
+
         # Quit font set up
         self.__f_game_quit = self.__font.render("Quit", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_game_quit)
@@ -119,7 +148,7 @@ class Menu:
         self.__f_pong = self.__font.render("Pong", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_pong)
         self.__f_pong_pos = self.__f_pong.get_rect()
-        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx + PONG_X
         self.__f_pong_pos.centery = self.__screen.get_rect().top + PONG_Y
         self.__l_blit_object.append(self.__f_pong_pos)
 
@@ -127,7 +156,7 @@ class Menu:
         self.__f_Snake = self.__font.render("Snake", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_Snake)
         self.__f_Snake_pos = self.__f_Snake.get_rect()
-        self.__f_Snake_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_Snake_pos.centerx = self.__screen.get_rect().centerx - SNAKE_X
         self.__f_Snake_pos.centery = self.__screen.get_rect().top + SNAKE_Y
         self.__l_blit_object.append(self.__f_Snake_pos)
 
