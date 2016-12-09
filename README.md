@@ -76,7 +76,18 @@
 
 ### Dependencies
 * Python2.7 Or newer
-* Pygames
+* Pygame
+	- Should you have any issues with starting 16-Bit-Hero-Arcade, change the following lines:
+		```
+		Old:
+		from game_skeleton import pause_menu
+		from game_skeleton import game_bar
+		
+		New:
+		import pause_menu
+		import game_bar
+		```
+	  This is due to differences in python versions.
 
 ### Installing dependencies
 ##### Arch Linux
@@ -117,9 +128,43 @@
 
 ### Guide To developing 16-Bit-Hero-Arcade
 1. Add a Game
-	```
-	### Items to check for
-	* 
-	```
-
+	- First your game directory into 16-Bit-Hero-Arcade
+	- Add game directory name to all file locations Ex
+	
+		```
+		Old
+		'resources/music/song.wav'
+		New
+		'cups/resources/music/song.wav'
+		```
+	- Add entry to menu.py and arcade.py
+	- Import the screen from our arcade.py through the argument parameters for your game Ex. def __init__(self, screen)
+	- Have your game inheret from game skeleton
+		
+		```
+		class Cups(game_skeleton.Game_Skeleton)
+		```
+		
+	- Add in necessary code for implementing the game skeleton (contains an game bar and pause menu)
+		
+		```
+		# load music and sounds
+		self.__screen = screen
+		self.__game_skeleton = game_skeleton.Game_Skeleton(self.__screen)
+		self.__screen.get_rect().height = self.__game_skeleton.get_game_height()
+		
+		# Inside game loop
+		# Score is not necessary
+		self.__game_skeleton.blit_game_bar(self.__game_title, self.__game_score)
+		
+		# Inside event handler
+		pause options = self.__game_skeleton.events(event)
+		if pause_options == 0:
+			self.__running = False
+			return True
+		elif pause_options == 1:
+			self.__running = False
+		```
+	- The game skeleton demo (gs_demo) is a good example of a blank slate for a game
+	- Enjoy the benefits of a game bar, pause menu, and resolution!
 	
