@@ -70,7 +70,7 @@ class Menu:
         self.__font = pygame.font.Font('resources/fonts/SkyrimFont.ttf', int(settings[SCREEN_X]/FONT_MODIFIER))
 
         # Music
-        self.__music = pygame.mixer.music.load('resources/music/Star_Fox_Space_Armada.mp3')
+        self.__music = pygame.mixer.music.load('resources/music/Star_Fox_Space_Armada.ogg')
 
         # Sounds
         self.__selection = pygame.mixer.Sound('resources/sounds/DarkSoulsStartSound.wav')
