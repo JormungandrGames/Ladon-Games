@@ -115,4 +115,11 @@
 ### License 
 * GPL license
 
+### Guide To developing 16-Bit-Hero-Arcade
+1. Add a Game
+	```
+	### Items to check for
+	* 
+	```
+
 	
