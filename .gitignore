@@ -39,5 +39,6 @@ Thumbs.db
 
 # Python generated file #
 #########################
-__pycache__
-.idea
+__pycache__/
+.idea/
+*.pyc

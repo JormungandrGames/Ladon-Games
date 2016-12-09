@@ -4,7 +4,7 @@ import pygame
 import time
 
 #
-# CHECK LINE 127 FOR ADDING GAMES
+# CHECK LINE 139 FOR ADDING GAMES
 #
 
 # ALPHA FADING CONSTANTS
@@ -28,17 +28,14 @@ TITLE_Y = 100
 QUIT_Y = 100
 ROW_ONE = 200
 ROW_TWO = 300
-CUPS_Y = 450
-PONG_Y = 300
-SNAKE_Y = 300
-PONG_X = 100
-SNAKE_X = 100
+TEXT_BUFFER = 100
 QUIT = 0
 
 # GAMES
 CUPS = 1
 PONG = 2
 SNAKE = 3
+GSD = 4
 
 
 # SCREEN CONSTANTS AND MUSIC
@@ -86,9 +83,11 @@ class Menu:
 
         # Sets screen size if it's full screen or not
         if self.__settings[MAX_SCREEN_SETTINGS] == 0:
-            self.__fade_surface = pygame.surface.Surface((self.__settings[SCREEN_X], self.__settings[SCREEN_Y]), pygame.FULLSCREEN)
+            self.__fade_surface \
+                = pygame.surface.Surface((self.__settings[SCREEN_X], self.__settings[SCREEN_Y]), pygame.FULLSCREEN)
         else:
-            self.__fade_surface = pygame.surface.Surface((self.__settings[SCREEN_X], self.__settings[SCREEN_Y]))
+            self.__fade_surface \
+                = pygame.surface.Surface((self.__settings[SCREEN_X], self.__settings[SCREEN_Y]))
 
         # Music
         pygame.mixer.music.play(LOOP_MUSIC)
@@ -101,33 +100,6 @@ class Menu:
         self.__f_game_title_pos.centery = self.__screen.get_rect().top + TITLE_Y
         self.__l_blit_object.append(self.__f_game_title_pos)
 
-        # Image cups set up
-        self.__i_cups_button = pygame.image.load("cups/resources/images/cups_menu.png").convert_alpha()
-        self.__i_cups_button = pygame.transform.scale(self.__i_cups_button, (150, 150))
-        self.__l_blit_object.append(self.__i_cups_button)
-        self.__i_cups_button_pos = self.__i_cups_button.get_rect()
-        self.__i_cups_button_pos.centerx = self.__screen.get_rect().centerx
-        self.__i_cups_button_pos.centery = self.__screen.get_rect().top + CUPS_Y
-        self.__l_blit_object.append(self.__i_cups_button_pos)
-
-        # Image pong set up
-        self.__i_pong_button = pygame.image.load("pong/resources/images/pong_menu.png").convert_alpha()
-        self.__i_pong_button = pygame.transform.scale(self.__i_pong_button, (200, 225))
-        self.__l_blit_object.append(self.__i_pong_button)
-        self.__i_pong_button_pos = self.__i_pong_button.get_rect()
-        self.__i_pong_button_pos.centerx = self.__screen.get_rect().centerx + PONG_X
-        self.__i_pong_button_pos.centery = self.__screen.get_rect().top + PONG_Y
-        self.__l_blit_object.append(self.__i_pong_button_pos)
-
-        # Image snake set up
-        self.__i_snake_button = pygame.image.load("Snake/resources/images/snake_menu.png").convert_alpha()
-        self.__i_snake_button = pygame.transform.scale(self.__i_snake_button, (225, 225))
-        self.__l_blit_object.append(self.__i_snake_button)
-        self.__i_snake_button_pos = self.__i_snake_button.get_rect()
-        self.__i_snake_button_pos.centerx = self.__screen.get_rect().centerx - SNAKE_X
-        self.__i_snake_button_pos.centery = self.__screen.get_rect().top + SNAKE_Y
-        self.__l_blit_object.append(self.__i_snake_button_pos)
-
         # Quit font set up
         self.__f_game_quit = self.__font.render("Quit", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_game_quit)
@@ -136,29 +108,64 @@ class Menu:
         self.__f_game_quit_pos.centery = self.__screen.get_rect().bottom - QUIT_Y
         self.__l_blit_object.append(self.__f_game_quit_pos)
 
-        # Cups temp setup
+        # Cups button setup
         self.__f_cups = self.__font.render("Cups", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_cups)
         self.__f_cups_pos = self.__f_cups.get_rect()
         self.__f_cups_pos.centerx = self.__screen.get_rect().centerx
-        self.__f_cups_pos.centery = self.__screen.get_rect().top + CUPS_Y
+        self.__f_cups_pos.centery = self.__f_game_title_pos.bottom + TEXT_BUFFER
         self.__l_blit_object.append(self.__f_cups_pos)
 
-        # Pong temp setup
+        # Pong button setup
         self.__f_pong = self.__font.render("Pong", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_pong)
         self.__f_pong_pos = self.__f_pong.get_rect()
-        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx + PONG_X
-        self.__f_pong_pos.centery = self.__screen.get_rect().top + PONG_Y
+        self.__f_pong_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_pong_pos.centery = self.__f_cups_pos.bottom + TEXT_BUFFER
         self.__l_blit_object.append(self.__f_pong_pos)
 
-        # Snake temp setup
+        # Snake button setup
         self.__f_Snake = self.__font.render("Snake", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_Snake)
         self.__f_Snake_pos = self.__f_Snake.get_rect()
-        self.__f_Snake_pos.centerx = self.__screen.get_rect().centerx - SNAKE_X
-        self.__f_Snake_pos.centery = self.__screen.get_rect().top + SNAKE_Y
+        self.__f_Snake_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_Snake_pos.centery = self.__f_pong_pos.bottom + TEXT_BUFFER
         self.__l_blit_object.append(self.__f_Snake_pos)
+
+        # Game Skeleton Demo (gsd) button setup
+        self.__f_gsd = self.__font.render("Game Skeleton Demo", ANTI_ANILIASING, WHITE)
+        self.__l_blit_object.append(self.__f_gsd)
+        self.__f_gsd_pos = self.__f_gsd.get_rect()
+        self.__f_gsd_pos.centerx = self.__screen.get_rect().centerx
+        self.__f_gsd_pos.centery = self.__f_Snake_pos.bottom + TEXT_BUFFER
+        self.__l_blit_object.append(self.__f_gsd_pos)
+
+        # Image cups set up
+        self.__i_cups_button = pygame.image.load("cups/resources/images/cups_menu.png").convert_alpha()
+        self.__i_cups_button = pygame.transform.scale(self.__i_cups_button, (150, 150))
+        self.__l_blit_object.append(self.__i_cups_button)
+        self.__i_cups_button_pos = self.__i_cups_button.get_rect()
+        self.__i_cups_button_pos.centerx = self.__f_cups_pos.centerx - self.__i_cups_button_pos.width
+        self.__i_cups_button_pos.centery = self.__f_cups_pos.centery
+        self.__l_blit_object.append(self.__i_cups_button_pos)
+
+        # Image pong set up
+        self.__i_pong_button = pygame.image.load("pong/resources/images/pong_menu.png").convert_alpha()
+        self.__i_pong_button = pygame.transform.scale(self.__i_pong_button, (200, 225))
+        self.__l_blit_object.append(self.__i_pong_button)
+        self.__i_pong_button_pos = self.__i_pong_button.get_rect()
+        self.__i_pong_button_pos.centerx = self.__screen.get_rect().centerx
+        self.__i_pong_button_pos.centery = self.__f_cups_pos.bottom + TEXT_BUFFER
+        self.__l_blit_object.append(self.__i_pong_button_pos)
+
+        # Image snake set up
+        self.__i_snake_button = pygame.image.load("Snake/resources/images/snake_menu.png").convert_alpha()
+        self.__i_snake_button = pygame.transform.scale(self.__i_snake_button, (225, 225))
+        self.__l_blit_object.append(self.__i_snake_button)
+        self.__i_snake_button_pos = self.__i_snake_button.get_rect()
+        self.__i_snake_button_pos.centerx = self.__i_cups_button_pos.centerx
+        self.__i_snake_button_pos.centery = self.__f_Snake_pos.centery
+        self.__l_blit_object.append(self.__i_snake_button_pos)
 
     def menu_loop(self):
         # Set up variables
@@ -198,6 +205,14 @@ class Menu:
                 self.__selection.play()
                 game_start = False
                 game_num = SNAKE
+
+            # Returns the Game Skeleton Demo index number
+            elif self.__f_gsd_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
+                pygame.mixer.fadeout(MUSIC_FADE)
+                self.__selection.play()
+                game_start = False
+                game_num = GSD
+
             # Quits the arcade
             elif self.__f_game_quit_pos.collidepoint(mouse_pos) and on_click1 == CLICKED and game_start:
                 return QUIT
