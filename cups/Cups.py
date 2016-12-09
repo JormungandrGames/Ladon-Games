@@ -1,8 +1,7 @@
-import pygame
 from random import randint
-from pause_menu import *
-from menu import *
 
+from game_skeleton import game_skeleton
+from menu import *
 
 #
 # SKIP TO LINE 107 FOR PAUSE MENU
@@ -39,20 +38,26 @@ TEXT_SIZE = 50
 SCORE_X = 280
 
 
-class Cups:
+class Cups(game_skeleton.Game_Skeleton):
     def __init__(self, screen):
+        # Loads the music, -1 means loop it forever
+        # Music must be initialized before the game skeleton
+        self.__music = pygame.mixer.music.load('cups/resources/music/YodaSong.ogg')
+        pygame.mixer.music.play(LOOP_MUSIC)
+
         # Screen surface
+        self.__game_skeleton = game_skeleton.Game_Skeleton(screen)
         self.__screen = screen
+        self.__screen.get_rect().height = self.__game_skeleton.get_game_height()
 
         # Running game
         self.__running = True
 
-        # Init Music
-        self.__music = pygame.mixer.music.load('cups/resources/music/YodaSong.ogg')
-
         # Load Font
         self.__font = pygame.font.Font('cups/resources/fonts/NIAGENG.TTF',
                                        int(self.__screen.get_rect().height/FONT_MODIFIER))
+
+        self.__game_title = "Cups"
 
         self.__score = 0
 
@@ -62,18 +67,15 @@ class Cups:
         greg = pygame.transform.scale(greg, (GREG_SIZE_X, GREG_SIZE_Y))
         greg_pos = greg.get_rect()
 
-        # Loads the music, -1 means loop it forever
-        pygame.mixer.music.play(LOOP_MUSIC)
-
         # Reload the cups and font
         restart = False
         rand = None
 
         # Call pause
-        pause = Pause(self.__screen)
         pause_options = None
         self.__running = True
         count = 0
+
         # Game Loop
         while self.__running:
             # Clears the screen and fills it with color (black)
@@ -91,12 +93,25 @@ class Cups:
                                                               (self.__screen.get_rect().centery - OUTER_CUPS_Y),
                                                               CUP_SIZE_X, CUP_SIZE_Y), RECT_WIDTH)
 
+            # Blits the game bar
+            self.__game_skeleton.blit_game_bar(self.__game_title, self.__score)
+
             # Get mouse clicks
             mouse_pos = pygame.mouse.get_pos()
             (on_click1, on_click2, on_click3) = pygame.mouse.get_pressed()
             cup_num = 0
             # On mouse and keyboard events
             for event in pygame.event.get():
+                # Check for Pause menu events, and
+                # game bar events
+                # Get escape key press for menu; COPY THIS BLOCK FOR PAUSE MENU
+                pause_options = self.__game_skeleton.events(event)
+                if pause_options == 0:
+                    self.__running = False
+                    return True
+                elif pause_options == 1:
+                    self.__running = False
+
                 # Hit quit
                 if event.type == pygame.QUIT:
                     self.__running = False
@@ -120,15 +135,6 @@ class Cups:
                     rand = randint(RAND_RANGE_ONE, RAND_RANGE_TWO)
                     restart = True
                     cup_num = 3
-
-                # Get escape key press for menu; COPY THIS BLOCK FOR PAUSE MENU
-                elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
-                    pause_options = pause.pause_loop()
-                    if pause_options == 0:
-                        self.__running = False
-                        return True
-                    elif pause_options == 1:
-                        self.__running = False
 
                 if rand == 1 and count == 0:
                     count = 1

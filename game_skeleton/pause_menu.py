@@ -14,10 +14,11 @@ CLICKED = 1
 HALF = 2
 
 
-class Pause:
+class Pause():
     def __init__(self, screen):
         self.__screen = screen
-        self.__font = pygame.font.Font('resources/fonts/SkyrimFont.ttf', (int(self.__screen.get_rect().height/FONT_MODIFIER)))
+        self.__font = pygame.font.Font('resources/fonts/SkyrimFont.ttf',
+                                       (int(self.__screen.get_rect().height/FONT_MODIFIER)))
 
     def pause_loop(self):
         # Crates the transparent surface for the menu
@@ -52,6 +53,12 @@ class Pause:
 
         while paused:
             pygame.event.clear()
+            # If the sound or music is running, then when the game is pause
+            # the sound and/or music is also paused
+            if pygame.mixer.get_busy():
+                pygame.mixer.pause()
+            if pygame.mixer.music.get_busy():
+                pygame.mixer.music.pause()
 
             # Gets the mouse position
             mouse_pos = pygame.mouse.get_pos()
@@ -64,7 +71,12 @@ class Pause:
             if event.type == pygame.QUIT:
                 return
             # User clicked return, returns to game
+            # also unpauses music
             elif b_return_pos.collidepoint(mouse_pos) and on_click1 == CLICKED:
+                if pygame.mixer.get_busy():
+                    pygame.mixer.unpause()
+                if pygame.mixer.music.get_busy():
+                    pygame.mixer.music.unpause()
                 return
             # User clicked menu, exits to menu
             elif b_menu_pos.collidepoint(mouse_pos) and on_click1 == CLICKED:

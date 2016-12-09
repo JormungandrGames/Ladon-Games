@@ -1,13 +1,11 @@
 from __future__ import division
-import pygame
-from pause_menu import *
+
+from game_skeleton.pause_menu import *
 from pong import controls
-from pong import pong_resources
 from pong import pong_game
 
-
 # Pong game!
-BLACK = (255, 255, 255)
+BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 MAIN_MENU = 1
@@ -42,7 +40,7 @@ class PongMenu:
 
         # Load Buttons and title
         # title
-        self.__f_game_title = self.__font.render("ULTIMATE PONG", 1, (20, 20, 20))
+        self.__f_game_title = self.__font.render("ULTIMATE PONG", 1, WHITE)
         self.__l_blit_object.append(self.__f_game_title)
         self.__f_game_title_pos = self.__f_game_title.get_rect()
         self.__f_game_title_pos.centerx = self.__screen.get_rect().centerx
@@ -81,7 +79,7 @@ class PongMenu:
         self.__i_exit_button_pos.centery = self.__screen.get_rect().top + 500
         self.__l_blit_object.append(self.__i_exit_button_pos)
         # play string
-        self.__f_play_button = self.__font.render("PLAY", 1, (20, 20, 20))
+        self.__f_play_button = self.__font.render("PLAY", 1, WHITE)
         self.__f_play_button = pygame.transform.scale(self.__f_play_button, (150, 100))
         self.__l_blit_object.append(self.__f_play_button)
         self.__f_play_button_pos = self.__f_play_button.get_rect()
@@ -89,7 +87,7 @@ class PongMenu:
         self.__f_play_button_pos.centery = self.__screen.get_rect().top + 325
         self.__l_blit_object.append(self.__f_play_button_pos)
         # menu string
-        self.__f_menu_button = self.__font.render("MENU", 1, (20, 20, 20))
+        self.__f_menu_button = self.__font.render("MENU", 1, WHITE)
         self.__f_menu_button = pygame.transform.scale(self.__f_menu_button, (150, 100))
         self.__l_blit_object.append(self.__f_menu_button)
         self.__f_menu_button_pos = self.__f_menu_button.get_rect()
@@ -97,7 +95,7 @@ class PongMenu:
         self.__f_menu_button_pos.centery = self.__screen.get_rect().top + 500
         self.__l_blit_object.append(self.__f_menu_button_pos)
         # exit string
-        self.__f_exit_button = self.__font.render("EXIT", 1, (20, 20, 20))
+        self.__f_exit_button = self.__font.render("EXIT", 1, WHITE)
         self.__f_exit_button = pygame.transform.scale(self.__f_exit_button, (150, 100))
         self.__l_blit_object.append(self.__f_exit_button)
         self.__f_exit_button_pos = self.__f_exit_button.get_rect()
@@ -105,7 +103,7 @@ class PongMenu:
         self.__f_exit_button_pos.centery = self.__screen.get_rect().top + 500
         self.__l_blit_object.append(self.__f_exit_button_pos)
         # controls string
-        self.__f_help_button = self.__font.render("HELP", 1, (20, 20, 20))
+        self.__f_help_button = self.__font.render("HELP", 1, WHITE)
         self.__f_help_button = pygame.transform.scale(self.__f_help_button, (150, 100))
         self.__l_blit_object.append(self.__f_help_button)
         self.__f_help_button_pos = self.__f_help_button.get_rect()
