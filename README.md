@@ -94,7 +94,7 @@
 	```
 	pacman -S python # For the lastest version of python
 	pacman -S python2-pygame
-	'''
+	```
 ##### Debian-Based Distros
 	```
 	# Comes with python 2.7, Upgrade with sudo apt-get install python3
