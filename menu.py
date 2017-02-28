@@ -67,10 +67,10 @@ class Menu:
         self.__font = pygame.font.Font('resources/fonts/SkyrimFont.ttf', int(settings[SCREEN_X]/FONT_MODIFIER))
 
         # Music
-        self.__music = pygame.mixer.music.load('resources/music/Star_Fox_Space_Armada.ogg')
+        self.__music = pygame.mixer.music.load('resources/music/main_menu_music.ogg')
 
         # Sounds
-        self.__selection = pygame.mixer.Sound('resources/sounds/DarkSoulsStartSound.wav')
+        self.__selection = pygame.mixer.Sound('resources/sounds/selection.wav')
 
         # Constructor Call
         self.__constructor()
