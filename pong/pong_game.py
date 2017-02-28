@@ -22,7 +22,7 @@ MENU = 0
 class PongGame:
     def __init__(self, screen):
         # Loads the music, -1 means loop it forever
-        self.__music = pygame.mixer.music.load('pong/resources/music/NotTheFuture.ogg')
+        self.__music = pygame.mixer.music.load('pong/resources/music/pong_music.ogg')
         pygame.mixer.music.play(-1)
         # variables
         self.__game_title = "Pong"
