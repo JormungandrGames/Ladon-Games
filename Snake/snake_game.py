@@ -18,7 +18,7 @@ SPEED = 5
 class Snake:
     def __init__(self, screen):
         # Sounds
-        self.__music = pygame.mixer.music.load('Snake/resources/music/BushesLove.ogg')
+        self.__music = pygame.mixer.music.load('Snake/resources/music/snake_music.ogg')
 
         # Loads the music, -1 means loop it forever
         pygame.mixer.music.play(LOOP_MUSIC)
