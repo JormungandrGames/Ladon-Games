@@ -6,7 +6,7 @@ class GameSkeletonDemo(game_skeleton.Game_Skeleton):
     def __init__(self, screen):
         # Loads the music, -1 means loop it forever
         # Music must be initialized before the game skeleton
-        self.__music = pygame.mixer.Sound('gs_demo/resources/music/YodaSong.ogg')
+        self.__music = pygame.mixer.Sound('gs_demo/resources/music/snake_music.ogg')
         pygame.mixer.music.play(LOOP_MUSIC)
 
         # Screen surface
