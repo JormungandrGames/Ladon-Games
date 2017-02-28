@@ -41,7 +41,7 @@ class Cups(game_skeleton.Game_Skeleton):
     def __init__(self, screen):
         # Loads the music, -1 means loop it forever
         # Music must be initialized before the game skeleton
-        self.__music = pygame.mixer.music.load('cups/resources/music/YodaSong.ogg')
+        self.__music = pygame.mixer.music.load('cups/resources/music/cups_music.ogg')
         pygame.mixer.music.play(LOOP_MUSIC)
 
         # Screen surface
