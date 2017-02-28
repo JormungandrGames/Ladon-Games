@@ -26,7 +26,7 @@ class PongMenu:
         self.__running = True
 
         # Init Music
-        self.__music = pygame.mixer.music.load('pong/resources/music/NotTheFuture.ogg')
+        self.__music = pygame.mixer.music.load('pong/resources/music/pong_music.ogg')
 
         # Load Font
         self.__font = pygame.font.Font('pong/resources/fonts/NIAGENG.TTF', 100)
