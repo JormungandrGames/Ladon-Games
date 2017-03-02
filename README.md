@@ -1,4 +1,8 @@
-# 16-Bit-Hero-Arcade
+# Ladon-Games
+
+###This was completed through a Computer Science course at 
+Pacific University (https://www.pacificu.edu/future-undergraduates/academics/areas-study/computer-science) 
+taught by Dr. Chadd Williams (http://zeus.cs.pacificu.edu/chadd/)
 
 ###### Resources
 * Visit http://pygame.org/docs/tut/newbieguide.html for a quick guide on pygames.
