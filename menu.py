@@ -93,7 +93,7 @@ class Menu:
         pygame.mixer.music.play(LOOP_MUSIC)
 
         # Title set up
-        self.__f_game_title = self.__font.render("16-Bit-Hero-Arcade", ANTI_ANILIASING, WHITE)
+        self.__f_game_title = self.__font.render("Ladon Games", ANTI_ANILIASING, WHITE)
         self.__l_blit_object.append(self.__f_game_title)
         self.__f_game_title_pos = self.__f_game_title.get_rect()
         self.__f_game_title_pos.centerx = self.__screen.get_rect().centerx
