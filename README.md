@@ -12,17 +12,17 @@
 1. Clone your fork to local computer:
 
 	```
-	git clone git@github.com:NAME/16-Bit-Hero-Arcade.git
+	git clone git@github.com:NAME/Ladon-Games.git
 	```
 2. Add the master branch as the upstream
 
 	```
-	git remote add upstream git@github.com:cs360f16/16-Bit-Hero-Arcade.git
+	git remote add upstream git@github.com:JormungandrGames/Ladon-Games.git
 	```
 3. Create a branch with this format
 
 	```
-	git branch puneid_bug/feature_issue
+	git branch update_type/feature_issue
 	```
 4. Add and commit
 
@@ -46,11 +46,11 @@
 		```
 		mkdir issue_#
 		cd issue_#
-		git clone git@github.com:NAME/16-Bit-Hero-Arcade.git
-		cd 16-Bit-Hero-Arcade
+		git clone git@github.com:NAME/Ladon-Games.git
+		cd Ladon-Games
 
-		git checkout -b punetid_issue_# master
-		git pull https://github.com/NAME/16-Bit-Hero-Arcade.git puneid_issue_#
+		git checkout -b issue_# master
+		git pull https://github.com/NAME/16-Bit-Hero-Arcade.git issue_#
 
 		fix conflicts
 
@@ -58,7 +58,7 @@
 		git commit -m "Message"
 
 		git checkout master
-		git merge --no-ff punetid_issue_#
+		git merge --no-ff issue_#
 		git push origin master
 		```
 8. After the pull request has been merged, on your local computer pull the changes down into you master and then push them to your fork
@@ -71,7 +71,7 @@
 9. You can now delete your branch
 
 	```
-	git branch -d punetid_issue_#
+	git branch -d issue_#
 	```
 
 ### Dependencies
