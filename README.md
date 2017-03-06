@@ -12,72 +12,6 @@ taught by Dr. Chadd Williams (http://zeus.cs.pacificu.edu/chadd/)
 * Example of "Dirty Rectangle Processing" discussed in the pygames guide http://archives.seul.org/pygame/users/Apr-2006/msg00216.html
 * For smooth gameplay http://gafferongames.com/game-physics/fix-your-timestep/
 
-###### Workflow
-1. Clone your fork to local computer:
-
-	```
-	git clone git@github.com:NAME/Ladon-Games.git
-	```
-2. Add the master branch as the upstream
-
-	```
-	git remote add upstream git@github.com:JormungandrGames/Ladon-Games.git
-	```
-3. Create a branch with this format
-
-	```
-	git branch update_type/feature_issue
-	```
-4. Add and commit
-
-	```
-	git add .
-	git commit -m "Message"
-	```
-5. Push branch to origin
-
-	```
-	git push origin BRANCH_NAME
-	```
-6. Send pull request from your fork
-
-	```
-	Go to branch and click "Pull Request"
-	```
-7. Wait for a team member to merge and fix any conflicts if there are any
-	* For fixing merge conflicts, make a file for the fix and pull the branch down
-	
-		```
-		mkdir issue_#
-		cd issue_#
-		git clone git@github.com:NAME/Ladon-Games.git
-		cd Ladon-Games
-
-		git checkout -b issue_# master
-		git pull https://github.com/NAME/16-Bit-Hero-Arcade.git issue_#
-
-		fix conflicts
-
-		git add .
-		git commit -m "Message"
-
-		git checkout master
-		git merge --no-ff issue_#
-		git push origin master
-		```
-8. After the pull request has been merged, on your local computer pull the changes down into you master and then push them to your fork
-
-	```
-	git checkout master
-	git fetch upstream master
-	git merge upstream/master
-	```
-9. You can now delete your branch
-
-	```
-	git branch -d issue_#
-	```
-
 ### Dependencies
 * Python2.7 Or newer
 * Pygame
@@ -172,3 +106,70 @@ taught by Dr. Chadd Williams (http://zeus.cs.pacificu.edu/chadd/)
 	- The game skeleton demo (gs_demo) is a good example of a blank slate for a game
 	- Enjoy the benefits of a game bar, pause menu, and resolution!
 	
+	
+	###### Workflow
+1. Clone your fork to local computer:
+
+	```
+	git clone git@github.com:NAME/Ladon-Games.git
+	```
+2. Add the master branch as the upstream
+
+	```
+	git remote add upstream git@github.com:JormungandrGames/Ladon-Games.git
+	```
+3. Create a branch with this format
+
+	```
+	git branch update_type/feature_issue
+	```
+4. Add and commit
+
+	```
+	git add .
+	git commit -m "Message"
+	```
+5. Push branch to origin
+
+	```
+	git push origin BRANCH_NAME
+	```
+6. Send pull request from your fork
+
+	```
+	Go to branch and click "Pull Request"
+	```
+7. Wait for a team member to merge and fix any conflicts if there are any
+	* For fixing merge conflicts, make a file for the fix and pull the branch down
+	
+		```
+		mkdir issue_#
+		cd issue_#
+		git clone git@github.com:NAME/Ladon-Games.git
+		cd Ladon-Games
+
+		git checkout -b issue_# master
+		git pull https://github.com/NAME/16-Bit-Hero-Arcade.git issue_#
+
+		fix conflicts
+
+		git add .
+		git commit -m "Message"
+
+		git checkout master
+		git merge --no-ff issue_#
+		git push origin master
+		```
+8. After the pull request has been merged, on your local computer pull the changes down into you master and then push them to your fork
+
+	```
+	git checkout master
+	git fetch upstream master
+	git merge upstream/master
+	```
+9. You can now delete your branch
+
+	```
+	git branch -d issue_#
+	```
+
