@@ -107,7 +107,7 @@ taught by Dr. Chadd Williams (http://zeus.cs.pacificu.edu/chadd/)
 	- Enjoy the benefits of a game bar, pause menu, and resolution!
 	
 	
-	###### Workflow
+### Workflow
 1. Clone your fork to local computer:
 
 	```
